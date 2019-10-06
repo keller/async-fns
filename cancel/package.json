@@ -1,0 +1,19 @@
+{
+  "name": "cancel",
+  "amdName": "asyncCancel",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/cancel.js",
+  "module": "dist/cancel.module.js",
+  "umd:main": "dist/cancel.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}

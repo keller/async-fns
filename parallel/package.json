@@ -1,0 +1,19 @@
+{
+  "name": "parallel",
+  "amdName": "asyncParallel",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/parallel.js",
+  "module": "dist/parallel.module.js",
+  "umd:main": "dist/parallel.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}

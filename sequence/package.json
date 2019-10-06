@@ -1,0 +1,19 @@
+{
+  "name": "sequence",
+  "amdName": "asyncSequence",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/sequence.js",
+  "module": "dist/sequence.module.js",
+  "umd:main": "dist/sequence.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}
