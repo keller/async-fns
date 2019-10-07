@@ -1,0 +1,19 @@
+{
+  "name": "subscriber",
+  "amdName": "asyncFnsSubscriber",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/subscriber.js",
+  "module": "dist/subscriber.module.js",
+  "umd:main": "dist/subscriber.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}
