@@ -3,13 +3,17 @@ import { emitter } from "../src";
 describe("emitter", () => {
   it("should subscribe to emitter", done => {
     expect.assertions(5);
+
     const timer = emitter();
+
+    let a = 0;
     setInterval(() => {
-      timer.emit(9);
-    }, 100);
+      timer.emit(a++);
+    }, 10);
+
     let i = 0;
-    return timer.subscribe(val => {
-      expect(val).toBe(9);
+    timer.subscribe(val => {
+      expect(val).toBe(i);
       if (++i >= 5) done();
     });
   });
