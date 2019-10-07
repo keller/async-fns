@@ -1,11 +1,11 @@
 {
-  "name": "subscriber",
-  "amdName": "asyncFnsSubscriber",
+  "name": "emitter",
+  "amdName": "asyncFnsEmitter",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/subscriber.js",
-  "module": "dist/subscriber.module.js",
-  "umd:main": "dist/subscriber.umd.js",
+  "main": "dist/emitter.js",
+  "module": "dist/emitter.module.js",
+  "umd:main": "dist/emitter.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",

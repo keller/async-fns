@@ -13,7 +13,7 @@
     "build:sequence": "microbundle --cwd sequence",
     "build:parallel": "microbundle --cwd parallel",
     "build:cancel": "microbundle --cwd cancel",
-    "build:subscriber": "microbundle --cwd subscriber",
+    "build:emitter": "microbundle --cwd emitter",
     "dev": "microbundle watch",
     "test": "jest"
   },
