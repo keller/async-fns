@@ -1,6 +1,6 @@
 {
   "name": "sequence",
-  "amdName": "asyncSequence",
+  "amdName": "asyncFnsSequence",
   "version": "0.1.0",
   "description": "",
   "main": "dist/sequence.js",

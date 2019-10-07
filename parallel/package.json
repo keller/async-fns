@@ -1,6 +1,6 @@
 {
   "name": "parallel",
-  "amdName": "asyncParallel",
+  "amdName": "asyncFnsParallel",
   "version": "0.1.0",
   "description": "",
   "main": "dist/parallel.js",

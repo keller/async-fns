@@ -1,6 +1,6 @@
 {
   "name": "cancel",
-  "amdName": "asyncCancel",
+  "amdName": "asyncFnsCancel",
   "version": "0.1.0",
   "description": "",
   "main": "dist/cancel.js",
