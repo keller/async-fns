@@ -1,5 +1,5 @@
-const STOP = "@@STOP_SEQUENCE";
-const THROW = "@@STOP_SEQUENCE";
+import { validate, valid } from "../../src/helpers";
+
 export default function sequence(fns) {
   let stopped = false;
   return fns.reduce(
@@ -8,11 +8,11 @@ export default function sequence(fns) {
         if (stopped) {
           return Promise.resolve(result);
         }
-        if (result != null && result.STOP == STOP) {
+        if (result != null && validate(result) && result.type == "stop") {
           stopped = true;
           return Promise.resolve(result.value);
         }
-        if (result != null && result.THROW == THROW) {
+        if (result != null && validate(result) && result.type == "throw") {
           return Promise.reject(result.error);
         }
         return fn(result);
@@ -20,5 +20,5 @@ export default function sequence(fns) {
     Promise.resolve()
   );
 }
-sequence.stop = value => ({ STOP, value });
-sequence.throw = error => ({ THROW, error });
+sequence.stop = value => valid({ type: "stop", value });
+sequence.throw = error => valid({ type: "throw", error });
