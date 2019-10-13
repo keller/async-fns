@@ -14,7 +14,7 @@
     "build:parallel": "microbundle --cwd parallel",
     "build:cancel": "microbundle --cwd cancel",
     "build:emitter": "microbundle --cwd emitter",
-    "build:run": "microbundle --cwd run",
+    "build:run": "microbundle --cwd channel",
     "dev": "microbundle watch",
     "lint": "eslint .",
     "test": "jest"

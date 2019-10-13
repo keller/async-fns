@@ -1,5 +1,3 @@
-import { validate, valid } from "../../src/helpers";
-
 export default function sequence(fns) {
   let stopped = false;
   return fns.reduce(
@@ -8,11 +6,11 @@ export default function sequence(fns) {
         if (stopped) {
           return Promise.resolve(result);
         }
-        if (result != null && validate(result) && result.type == "stop") {
+        if (result != null && result.type == "stop") {
           stopped = true;
           return Promise.resolve(result.value);
         }
-        if (result != null && validate(result) && result.type == "throw") {
+        if (result != null && result.type == "throw") {
           return Promise.reject(result.error);
         }
         return fn(result);
@@ -20,5 +18,5 @@ export default function sequence(fns) {
     Promise.resolve()
   );
 }
-sequence.stop = value => valid({ type: "stop", value });
-sequence.throw = error => valid({ type: "throw", error });
+sequence.stop = value => ({ type: "stop", value });
+sequence.throw = error => ({ type: "throw", error });
