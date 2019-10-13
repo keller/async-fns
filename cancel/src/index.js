@@ -1,12 +1,12 @@
 export default {
   source() {
     let cancel = () => {};
-    const promise = new Promise((resolve, reject) => {
+    const _promise = new Promise((resolve, reject) => {
       cancel = error => reject(error);
     });
     return {
       token: {
-        _promise: promise
+        _promise
       },
       cancel
     };
