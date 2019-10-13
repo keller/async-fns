@@ -6,17 +6,17 @@ export default function sequence(fns) {
         if (stopped) {
           return Promise.resolve(result);
         }
-        if (result != null && result.type == "stop") {
+        if (result != null && result._type == "stop") {
           stopped = true;
-          return Promise.resolve(result.value);
+          return Promise.resolve(result._value);
         }
-        if (result != null && result.type == "throw") {
-          return Promise.reject(result.error);
+        if (result != null && result._type == "throw") {
+          return Promise.reject(result._error);
         }
         return fn(result);
       }),
     Promise.resolve()
   );
 }
-sequence.stop = value => ({ type: "stop", value });
-sequence.throw = error => ({ type: "throw", error });
+sequence.stop = _value => ({ _type: "stop", _value });
+sequence.throw = _error => ({ _type: "throw", _error });

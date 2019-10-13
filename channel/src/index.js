@@ -5,9 +5,9 @@ export function run(genFn, ...args) {
     if (done) {
       return;
     }
-    if (value != null && value.type == "tk") {
+    if (value != null && value._type == "tk") {
       value(step);
-    } else if (value != null && value.type == "pt") {
+    } else if (value != null && value._type == "pt") {
       value(step);
     } else {
       Promise.resolve(value).then(data => step(data));
@@ -26,7 +26,7 @@ export function channel(em) {
             next(data);
           });
         },
-        { type: "tk" }
+        { _type: "tk" }
       );
     },
     put(payload) {
@@ -37,7 +37,7 @@ export function channel(em) {
           });
           next();
         },
-        { type: "pt" }
+        { _type: "pt" }
       );
     }
   };

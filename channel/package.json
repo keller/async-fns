@@ -15,5 +15,8 @@
   "keywords": [],
   "author": "Keller Davis",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "mangle": {
+    "regex": "^_"
+  }
 }

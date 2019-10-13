@@ -6,14 +6,14 @@ export default {
     });
     return {
       token: {
-        promise
+        _promise: promise
       },
       cancel
     };
   },
   wrap(fn, token) {
     return function() {
-      return Promise.race([fn(), token.promise]);
+      return Promise.race([fn(), token._promise]);
     };
   }
 };
