@@ -6,7 +6,7 @@ export default function emitter() {
       return () => listeners.splice(listeners.indexOf(listener), 1);
     },
     emit(msg) {
-      listeners.forEach(cb => cb(msg));
+      [...listeners].forEach(cb => cb(msg));
     }
   };
 }
