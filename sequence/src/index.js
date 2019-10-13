@@ -1,3 +1,5 @@
+const STOP = "@@ASYNCSTOP";
+const THROW = "@@ASYNCTHROW";
 export default function sequence(fns) {
   let stopped = false;
   return fns.reduce(
@@ -6,11 +8,11 @@ export default function sequence(fns) {
         if (stopped) {
           return Promise.resolve(result);
         }
-        if (result != null && result._type == "stop") {
+        if (result != null && result._type == STOP) {
           stopped = true;
           return Promise.resolve(result._value);
         }
-        if (result != null && result._type == "throw") {
+        if (result != null && result._type == THROW) {
           return Promise.reject(result._error);
         }
         return fn(result);
@@ -18,5 +20,5 @@ export default function sequence(fns) {
     Promise.resolve()
   );
 }
-sequence.stop = _value => ({ _type: "stop", _value });
-sequence.throw = _error => ({ _type: "throw", _error });
+sequence.stop = _value => ({ _type: STOP, _value });
+sequence.throw = _error => ({ _type: THROW, _error });

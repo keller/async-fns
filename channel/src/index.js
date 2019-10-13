@@ -1,3 +1,5 @@
+const TAKE = "@@ASYNCTAKE";
+const PUT = "@@ASYNCPUT";
 export function run(genFn, ...args) {
   const gen = genFn(...args);
   function step(val) {
@@ -5,9 +7,9 @@ export function run(genFn, ...args) {
     if (done) {
       return;
     }
-    if (value != null && value._type == "tk") {
+    if (value != null && value._type == TAKE) {
       value(step);
-    } else if (value != null && value._type == "pt") {
+    } else if (value != null && value._type == PUT) {
       value(step);
     } else {
       Promise.resolve(value).then(data => step(data));
@@ -26,7 +28,7 @@ export function channel(em) {
             next(data);
           });
         },
-        { _type: "tk" }
+        { _type: TAKE }
       );
     },
     put(payload) {
@@ -37,7 +39,7 @@ export function channel(em) {
           });
           next();
         },
-        { _type: "pt" }
+        { _type: PUT }
       );
     }
   };
