@@ -16,6 +16,7 @@
     "build:emitter": "microbundle --cwd emitter",
     "build:run": "microbundle --cwd run",
     "dev": "microbundle watch",
+    "lint": "eslint .",
     "test": "jest"
   },
   "keywords": [],
@@ -25,8 +26,11 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "eslint-plugin-jest": "^22.17.0",
     "jest": "^24.9.0",
     "microbundle": "^0.11.0",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2"
   }
 }

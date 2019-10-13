@@ -1,11 +1,11 @@
-import { cancel } from "../src";
+import { cancel, parallel } from "../src";
 
 describe("cancel", () => {
   function waitAndEcho(value) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(value);
-      }, 1000);
+      }, 200);
     });
   }
   it("should throw when canceled", () => {
@@ -17,10 +17,14 @@ describe("cancel", () => {
       source.cancel(ERROR);
     }, 100);
 
+    expect.assertions(1);
+
     return run().catch(e => expect(e).toEqual(ERROR));
   });
 
   it("should cancel multiple async fns", () => {
+    expect.assertions(2);
+
     const ERROR = { error: "error!" };
     const source = cancel.source();
     const run = cancel.wrap(() => waitAndEcho(10), source.token);
@@ -30,11 +34,15 @@ describe("cancel", () => {
       source.cancel(ERROR);
     }, 100);
 
-    return run().catch(e => expect(e).toEqual(ERROR));
-    return run2().catch(e => expect(e).toEqual(ERROR));
+    return parallel([
+      () => run().catch(e => expect(e).toEqual(ERROR)),
+      () => run2().catch(e => expect(e).toEqual(ERROR))
+    ]);
   });
 
   it("shouldn't cancel all fns", () => {
+    expect.assertions(2);
+
     const ERROR = { error: "error!" };
     const source = cancel.source();
     const source2 = cancel.source();
@@ -45,7 +53,12 @@ describe("cancel", () => {
       source.cancel(ERROR);
     }, 100);
 
-    return run().catch(e => expect(e).toEqual(ERROR));
-    return run2().resolves.toEqual(42);
+    return parallel([
+      () => run().catch(e => expect(e).toEqual(ERROR)),
+      () =>
+        run2().then(value => {
+          expect(value).toBe(42);
+        })
+    ]);
   });
 });

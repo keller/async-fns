@@ -34,7 +34,7 @@ describe("sequence", () => {
     return sequence([
       () => waitAndEcho(1),
       a => waitAndEcho(a + 1),
-      s => sequence.throw(ERROR),
+      () => sequence.throw(ERROR),
       b => waitAndEcho(b + 2)
     ]).catch(e => expect(e).toEqual(ERROR));
   });
