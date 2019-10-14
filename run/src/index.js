@@ -3,7 +3,7 @@ export default function run(genFn, ...args) {
   function step(val) {
     const { value, done } = gen.next(val);
     if (done) {
-      return;
+      return value;
     }
     Promise.resolve(value).then(data => step(data));
   }
