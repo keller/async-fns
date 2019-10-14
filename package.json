@@ -41,5 +41,10 @@
   },
   "mangle": {
     "regex": "^_"
-  }
+  },
+  "homepage": "https://github.com/keller/async-fns/",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/keller/async-fns.git"
+    }
 }
