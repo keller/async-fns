@@ -1,10 +1,10 @@
 function queryPromise(pr) {
-  let done = false;
+  let resolved = false;
   const r = Promise.resolve(pr).then(v => {
-    done = true;
+    resolved = true;
     return v;
   });
-  r._isDone = () => done;
+  r._isResolved = () => resolved;
   return r;
 }
 
@@ -16,5 +16,5 @@ export default function race(fns) {
       prs.push(pr);
       return pr;
     })
-  ).then(v => prs.map(pr => (pr._isDone() ? v : undefined)));
+  ).then(v => prs.map(pr => (pr._isResolved() ? v : undefined)));
 }
