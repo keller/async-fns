@@ -1,0 +1,19 @@
+{
+  "name": "run",
+  "amdName": "asyncFnsRun",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/run.js",
+  "module": "dist/run.module.js",
+  "umd:main": "dist/run.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}
