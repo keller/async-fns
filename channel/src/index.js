@@ -1,4 +1,3 @@
-const channelFn = "@@ASYNCCHANNELFN";
 export function run(genFn, ...args) {
   const gen = genFn(...args);
   function step(val) {
@@ -6,11 +5,7 @@ export function run(genFn, ...args) {
     if (done) {
       return;
     }
-    if (value != null && value._type == channelFn) {
-      value(step);
-    } else {
-      Promise.resolve(value).then(data => step(data));
-    }
+    Promise.resolve(value).then(data => step(data));
   }
   step();
 }
@@ -18,26 +13,17 @@ export function run(genFn, ...args) {
 export function channel(em) {
   return {
     take() {
-      return Object.assign(
-        next => {
-          const unsub = em.subscribe(data => {
-            unsub();
-            next(data);
-          });
-        },
-        { _type: channelFn }
-      );
+      return new Promise(resolve => {
+        const unsub = em.subscribe(data => {
+          unsub();
+          resolve(data);
+        });
+      });
     },
     put(payload) {
-      return Object.assign(
-        next => {
-          Promise.resolve().then(() => {
-            em.emit(payload);
-          });
-          next();
-        },
-        { _type: channelFn }
-      );
+      setTimeout(() => {
+        em.emit(payload);
+      }, 0);
     }
   };
 }
