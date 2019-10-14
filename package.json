@@ -12,6 +12,7 @@
     "build:index": "microbundle",
     "build:sequence": "microbundle --cwd sequence",
     "build:parallel": "microbundle --cwd parallel",
+    "build:race": "microbundle --cwd race",
     "build:cancel": "microbundle --cwd cancel",
     "build:emitter": "microbundle --cwd emitter",
     "build:run": "microbundle --cwd channel",

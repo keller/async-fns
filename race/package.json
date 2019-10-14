@@ -1,11 +1,11 @@
 {
-  "name": "channel",
-  "amdName": "asyncFnsChannel",
+  "name": "race",
+  "amdName": "asyncFnsRace",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/channel.js",
-  "module": "dist/channel.module.js",
-  "umd:main": "dist/channel.umd.js",
+  "main": "dist/race.js",
+  "module": "dist/race.module.js",
+  "umd:main": "dist/race.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",
@@ -15,5 +15,8 @@
   "keywords": [],
   "author": "Keller Davis",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "mangle": {
+    "regex": "^_"
+  }
 }
