@@ -12,8 +12,8 @@ export default {
     };
   },
   wrap(fn, token) {
-    return function() {
-      return Promise.race([fn(), token._promise]);
+    return function(...args) {
+      return Promise.race([fn(...args), token._promise]);
     };
   }
 };

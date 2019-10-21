@@ -27,16 +27,16 @@ describe("cancel", () => {
 
     const ERROR = { error: "error!" };
     const source = cancel.source();
-    const run = cancel.wrap(() => waitAndEcho(10), source.token);
-    const run2 = cancel.wrap(() => waitAndEcho(42), source.token);
+    const run = cancel.wrap(time => waitAndEcho(time), source.token);
+    const run2 = cancel.wrap(time => waitAndEcho(time), source.token);
 
     setTimeout(() => {
       source.cancel(ERROR);
     }, 100);
 
     return parallel([
-      () => run().catch(e => expect(e).toEqual(ERROR)),
-      () => run2().catch(e => expect(e).toEqual(ERROR))
+      () => run(10).catch(e => expect(e).toEqual(ERROR)),
+      () => run2(42).catch(e => expect(e).toEqual(ERROR))
     ]);
   });
 
@@ -46,17 +46,17 @@ describe("cancel", () => {
     const ERROR = { error: "error!" };
     const source = cancel.source();
     const source2 = cancel.source();
-    const run = cancel.wrap(() => waitAndEcho(10), source.token);
-    const run2 = cancel.wrap(() => waitAndEcho(42), source2.token);
+    const run = cancel.wrap(time => waitAndEcho(time), source.token);
+    const run2 = cancel.wrap(time => waitAndEcho(time), source2.token);
 
     setTimeout(() => {
       source.cancel(ERROR);
     }, 100);
 
     return parallel([
-      () => run().catch(e => expect(e).toEqual(ERROR)),
+      () => run(10).catch(e => expect(e).toEqual(ERROR)),
       () =>
-        run2().then(value => {
+        run2(42).then(value => {
           expect(value).toBe(42);
         })
     ]);
