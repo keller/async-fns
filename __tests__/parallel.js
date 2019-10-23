@@ -1,14 +1,14 @@
 import { parallel, sequence } from "../src";
 
-describe("parallel", () => {
-  function fakeFetch(url) {
-    const id = url.match(/\d+$/)[0];
-    return Promise.resolve({
-      json: () => Promise.resolve({ data: +id })
-    });
-  }
-  const fetchJson = url => sequence([() => fakeFetch(url), r => r.json()]);
+function fakeFetch(url) {
+  const id = url.match(/\d+$/)[0];
+  return Promise.resolve({
+    json: () => Promise.resolve({ data: +id })
+  });
+}
+const fetchJson = url => sequence([() => fakeFetch(url), r => r.json()]);
 
+describe("parallel", () => {
   it("should run async fns in parallel", () => {
     const url = id => `http://example.com/api/${id}`;
 
