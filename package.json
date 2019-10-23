@@ -22,7 +22,8 @@
     "lint": "eslint .",
     "prepare": "npm run clean && npm run build",
     "release": "np",
-    "test": "jest"
+    "test": "jest",
+    "watch": "jest --watch"
   },
   "keywords": [],
   "author": "Keller",

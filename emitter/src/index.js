@@ -6,9 +6,8 @@ export default function emitter() {
       return () => listeners[name].splice(listeners[name].indexOf(listener), 1);
     },
     emit(name, msg) {
-      [...(listeners[name] || []), ...(listeners["*"] || [])].map(cb =>
-        cb(msg)
-      );
+      [...listeners[name] || []].map(cb => cb(msg));
+      [...listeners["*"] || []].map(cb => cb(name, msg));
     }
   };
 }
