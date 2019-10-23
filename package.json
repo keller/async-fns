@@ -1,7 +1,7 @@
 {
   "name": "async-fns",
   "amdName": "asyncFns",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
