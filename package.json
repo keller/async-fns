@@ -17,7 +17,7 @@
     "build:emitter": "microbundle --cwd emitter",
     "build:channel": "microbundle --cwd channel",
     "build:run": "microbundle --cwd run",
-    "cleanup": "rm -rf dist && rm -rf **/dist",
+    "clean": "rm -rf dist && rm -rf **/dist",
     "dev": "microbundle watch",
     "lint": "eslint .",
     "prepare": "npm run clean && npm run build",
