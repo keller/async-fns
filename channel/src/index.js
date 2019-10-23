@@ -1,8 +1,9 @@
+const CHANNEL = "@@CHANNEL";
 export default function channel(em) {
   return {
     take() {
       return new Promise(resolve => {
-        const unsub = em.subscribe(data => {
+        const unsub = em.subscribe(CHANNEL, data => {
           unsub();
           resolve(data);
         });
@@ -10,7 +11,7 @@ export default function channel(em) {
     },
     put(payload) {
       setTimeout(() => {
-        em.emit(payload);
+        em.emit(CHANNEL, payload);
       }, 0);
     }
   };

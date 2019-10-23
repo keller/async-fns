@@ -1,12 +1,14 @@
 export default function emitter() {
-  const listeners = [];
+  const listeners = {};
   return {
-    subscribe(listener) {
-      listeners.push(listener);
-      return () => listeners.splice(listeners.indexOf(listener), 1);
+    subscribe(name, listener) {
+      (listeners[name] || (listeners[name] = [])).push(listener);
+      return () => listeners[name].splice(listeners[name].indexOf(listener), 1);
     },
-    emit(msg) {
-      [...listeners].forEach(cb => cb(msg));
+    emit(name, msg) {
+      [...(listeners[name] || []), ...(listeners["*"] || [])].map(cb =>
+        cb(msg)
+      );
     }
   };
 }
