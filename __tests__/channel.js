@@ -10,8 +10,8 @@ describe("run", () => {
 
     const counts = { ping: 0, pong: 0 };
     function* pingpong(name) {
-      if (name == "pong") {
-        yield chan.put("ping");
+      if (name == "ping") {
+        yield chan.put(name);
       }
       while (true) {
         const msg = yield chan.take();
