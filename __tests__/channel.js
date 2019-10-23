@@ -1,4 +1,4 @@
-import { channel, run } from "../src";
+import { emitter, channel, run } from "../src";
 
 const wait = time => new Promise(resolve => setTimeout(resolve, time));
 
@@ -6,7 +6,7 @@ describe("run", () => {
   it("run 2 generators sharing the same chanel", done => {
     expect.assertions(12);
 
-    const chan = channel();
+    const chan = channel(emitter());
 
     const counts = { ping: 0, pong: 0 };
     function* pingpong(name) {

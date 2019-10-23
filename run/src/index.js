@@ -1,14 +1,10 @@
 export default function run(genFn, ...args) {
   const gen = genFn(...args);
-  function step(method, val) {
-    const { value, done } = gen[method](val);
-    if (done) {
-      return value;
-    }
-    Promise.resolve(value).then(
-      data => step("next", data),
-      err => step("throw", err)
-    );
-  }
-  step("next");
+  const step = method => val => {
+    const next = gen[method](val);
+    if (next.done) return;
+
+    Promise.resolve(next.value).then(step("next"), step("throw"));
+  };
+  step("next")();
 }
