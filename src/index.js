@@ -1,9 +1,10 @@
-import sequence from "../sequence/src";
+import call from "../call/src";
+import cancel from "../cancel/src";
+import channel from "../channel/src";
+import emitter from "../emitter/src";
 import parallel from "../parallel/src";
 import race from "../race/src";
-import cancel from "../cancel/src";
-import emitter from "../emitter/src";
-import channel from "../channel/src";
 import run from "../run/src";
+import sequence from "../sequence/src";
 
-export { sequence, parallel, race, cancel, emitter, channel, run };
+export { call, cancel, channel, emitter, parallel, race, run, sequence };

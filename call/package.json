@@ -1,0 +1,19 @@
+{
+  "name": "call",
+  "amdName": "asyncFnsCall",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/call.js",
+  "module": "dist/call.module.js",
+  "umd:main": "dist/call.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true
+}
