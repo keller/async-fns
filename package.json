@@ -23,7 +23,7 @@
     "lint": "eslint .",
     "prepare": "npm run clean && npm run build",
     "release": "np",
-    "test": "jest",
+    "test": "jest --coverage",
     "watch": "jest --watch"
   },
   "keywords": [],

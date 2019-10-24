@@ -1,6 +1,6 @@
 export default {
   source() {
-    let cancel = () => {};
+    let cancel;
     const _promise = new Promise((resolve, reject) => {
       cancel = error => reject(error);
     });

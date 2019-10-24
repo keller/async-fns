@@ -24,7 +24,8 @@ describe("sequence", () => {
         () => waitAndEcho(1),
         a => waitAndEcho(a + 1),
         s => sequence.stop(s),
-        b => waitAndEcho(b + 2)
+        b => waitAndEcho(b + 2),
+        () => waitAndEcho(41)
       ])
     ).resolves.toEqual(2);
   });

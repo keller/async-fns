@@ -6,15 +6,40 @@ describe("emitter", () => {
 
     const timer = emitter();
 
-    let a = 0;
+    let count = 0;
     setInterval(() => {
-      timer.emit('count', a++);
+      timer.emit("count", count);
+      count += 1;
     }, 10);
 
     let i = 0;
-    timer.subscribe('count', val => {
+    const unsub = timer.subscribe("count", val => {
       expect(val).toBe(i);
-      if (++i >= 5) done();
+      i += 1;
+
+      if (i >= 5) {
+        unsub();
+        setTimeout(done, 50);
+      }
     });
+  });
+
+  it("should subscribe to multiple types", done => {
+    expect.assertions(5);
+
+    const em = emitter();
+
+    em.subscribe("count", i => {
+      expect(i).toBe(4);
+    });
+
+    em.subscribe("*", (type, msg) => {
+      expect(type).toBeTruthy();
+      expect(msg).toBeGreaterThan(1);
+    });
+
+    em.emit("count", 4);
+    em.emit("foo", 8);
+    setTimeout(done, 10);
   });
 });
