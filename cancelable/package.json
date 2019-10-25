@@ -1,11 +1,11 @@
 {
-  "name": "cancel",
-  "amdName": "asyncFnsCancel",
+  "name": "cancelable",
+  "amdName": "asyncFnsCancelable",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/cancel.js",
-  "module": "dist/cancel.module.js",
-  "umd:main": "dist/cancel.umd.js",
+  "main": "dist/cancelable.js",
+  "module": "dist/cancelable.module.js",
+  "umd:main": "dist/cancelable.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",
