@@ -11,7 +11,7 @@ describe("sequence", () => {
   it("should run async fns in sequence", () => {
     return expect(
       sequence([
-        () => waitAndEcho(1),
+        waitAndEcho(1),
         a => waitAndEcho(a + 1),
         b => waitAndEcho(b + 2)
       ])
@@ -21,7 +21,7 @@ describe("sequence", () => {
   it("should stop in async sequence", () => {
     return expect(
       sequence([
-        () => waitAndEcho(1),
+        waitAndEcho(1),
         a => waitAndEcho(a + 1),
         s => sequence.stop(s),
         b => waitAndEcho(b + 2),
@@ -33,7 +33,7 @@ describe("sequence", () => {
   it("should throw in async sequence", () => {
     const ERROR = { error: "error!" };
     return sequence([
-      () => waitAndEcho(1),
+      waitAndEcho(1),
       a => waitAndEcho(a + 1),
       () => sequence.throw(ERROR),
       b => waitAndEcho(b + 2)

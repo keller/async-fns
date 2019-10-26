@@ -11,8 +11,8 @@ describe("race", () => {
 
   it("should return array with only first resolved value", done => {
     race([
-      () => waitAndEchoTime(50),
-      () => waitAndEchoTime(10),
+      waitAndEchoTime(50),
+      waitAndEchoTime(10),
       () => waitAndEchoTime(900),
       () => waitAndEchoTime(40),
       () => waitAndEchoTime(30)

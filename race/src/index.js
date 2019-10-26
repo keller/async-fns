@@ -12,7 +12,7 @@ export default function race(fns) {
   const prs = [];
   return Promise.race(
     fns.map(fn => {
-      const pr = queryPromise(fn());
+      const pr = queryPromise(typeof fn == "function" ? fn() : fn);
       prs.push(pr);
       return pr;
     })

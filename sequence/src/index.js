@@ -8,7 +8,7 @@ export default function sequence(fns) {
           stopped = true;
           return Promise[result[stopSymbol]](result._value);
         }
-        return stopped ? result : fn(result);
+        return stopped ? result : typeof fn == "function" ? fn(result) : fn;
       }),
     null
   );

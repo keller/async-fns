@@ -17,7 +17,7 @@ describe("parallel", () => {
     const url = id => `http://example.com/api/${id}`;
 
     return expect(
-      parallel([() => fetchJson(url(3)), () => fetchJson(url(2))])
+      parallel([fetchJson(url(3)), () => fetchJson(url(2))])
     ).resolves.toEqual([{ data: 3 }, { data: 2 }]);
   });
 });

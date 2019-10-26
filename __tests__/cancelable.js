@@ -1,4 +1,4 @@
-import { call, cancelable, parallel } from "../src";
+import { cancelable, parallel } from "../src";
 
 describe("cancel", () => {
   function waitAndEcho(value) {
@@ -12,7 +12,7 @@ describe("cancel", () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const start = cancelable(call(waitAndEcho, 10), { signal });
+    const start = cancelable(() => waitAndEcho(10), { signal });
 
     setTimeout(() => {
       controller.abort();
