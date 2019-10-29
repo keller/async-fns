@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:index": "microbundle",
-    "build:abortable": "microbundle --cwd abortable",
+    "build:abortSignal": "microbundle --cwd abortSignal",
     "build:aborter": "microbundle --cwd aborter",
     "build:channel": "microbundle --cwd channel",
     "build:emitter": "microbundle --cwd emitter",

@@ -1,4 +1,4 @@
-import { abortable } from "../src";
+import { abortSignal } from "../src";
 
 describe("cancel", () => {
   function waitAndEcho(value) {
@@ -12,7 +12,7 @@ describe("cancel", () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const start = abortable(() => waitAndEcho(10), { signal });
+    const start = abortSignal({ signal }, () => waitAndEcho(10));
 
     setTimeout(() => {
       controller.abort();
@@ -29,8 +29,9 @@ describe("cancel", () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const start = abortable(time => waitAndEcho(time), { signal });
-    const start2 = abortable(time => waitAndEcho(time), { signal });
+    const withSignal = abortSignal({ signal });
+    const start = withSignal(time => waitAndEcho(time));
+    const start2 = withSignal(time => waitAndEcho(time));
 
     setTimeout(() => {
       controller.abort();
@@ -47,12 +48,18 @@ describe("cancel", () => {
 
     const controller = new AbortController();
     const controller2 = new AbortController();
-    const run = abortable(time => waitAndEcho(time), {
-      signal: controller.signal
-    });
-    const run2 = abortable(time => waitAndEcho(time), {
-      signal: controller2.signal
-    });
+    const run = abortSignal(
+      {
+        signal: controller.signal
+      },
+      time => waitAndEcho(time)
+    );
+    const run2 = abortSignal(
+      {
+        signal: controller2.signal
+      },
+      time => waitAndEcho(time)
+    );
 
     setTimeout(() => {
       controller.abort();

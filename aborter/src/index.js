@@ -8,18 +8,3 @@ export default function(abortEmitter) {
     }
   };
 }
-
-// export default function(abortEmitter) {
-//   let abort;
-//   options.signal.addEventListener("abort", () => {
-//     abort(new DOMException("The operation was aborted.", "AbortError"));
-//   });
-//   return function(...args) {
-//     return Promise.race([
-//       fn(...args),
-//       new Promise((_, reject) => {
-//         abort = e => reject(e);
-//       })
-//     ]);
-//   };
-// }

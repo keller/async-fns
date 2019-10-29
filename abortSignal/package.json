@@ -1,11 +1,11 @@
 {
-  "name": "abortable",
-  "amdName": "asyncFnsAbortable",
+  "name": "abortSignal",
+  "amdName": "asyncFnsAbortSignal",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/abortable.js",
-  "module": "dist/abortable.module.js",
-  "umd:main": "dist/abortable.umd.js",
+  "main": "dist/abortSignal.js",
+  "module": "dist/abortSignal.module.js",
+  "umd:main": "dist/abortSignal.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",

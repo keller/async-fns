@@ -1,4 +1,4 @@
-import { abortable, aborter, emitter } from "../src";
+import { abortSignal, aborter, emitter } from "../src";
 
 // remove DOMException for this test because assuming older browser and using own error object
 window.DOMException = undefined;
@@ -15,7 +15,7 @@ describe("cancel", () => {
     const controller = aborter(emitter());
     const signal = controller.signal;
 
-    const start = abortable(() => waitAndEcho(10), { signal });
+    const start = abortSignal({ signal }, () => waitAndEcho(10));
 
     setTimeout(() => {
       controller.abort();
@@ -32,8 +32,9 @@ describe("cancel", () => {
     const controller = aborter(emitter());
     const signal = controller.signal;
 
-    const start = abortable(time => waitAndEcho(time), { signal });
-    const start2 = abortable(time => waitAndEcho(time), { signal });
+    const withSignal = abortSignal({ signal });
+    const start = withSignal(time => waitAndEcho(time));
+    const start2 = withSignal(time => waitAndEcho(time));
 
     setTimeout(() => {
       controller.abort();
@@ -50,12 +51,18 @@ describe("cancel", () => {
 
     const controller = aborter(emitter());
     const controller2 = aborter(emitter());
-    const run = abortable(time => waitAndEcho(time), {
-      signal: controller.signal
-    });
-    const run2 = abortable(time => waitAndEcho(time), {
-      signal: controller2.signal
-    });
+    const run = abortSignal(
+      {
+        signal: controller.signal
+      },
+      time => waitAndEcho(time)
+    );
+    const run2 = abortSignal(
+      {
+        signal: controller2.signal
+      },
+      time => waitAndEcho(time)
+    );
 
     setTimeout(() => {
       controller.abort();
