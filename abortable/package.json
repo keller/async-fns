@@ -1,11 +1,11 @@
 {
-  "name": "parallel",
-  "amdName": "asyncFnsParallel",
+  "name": "abortable",
+  "amdName": "asyncFnsAbortable",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/parallel.js",
-  "module": "dist/parallel.module.js",
-  "umd:main": "dist/parallel.umd.js",
+  "main": "dist/abortable.js",
+  "module": "dist/abortable.module.js",
+  "umd:main": "dist/abortable.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",
@@ -15,5 +15,8 @@
   "keywords": [],
   "author": "Keller Davis",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "mangle": {
+    "regex": "^_"
+  }
 }

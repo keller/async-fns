@@ -10,11 +10,10 @@
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:index": "microbundle",
-    "build:call": "microbundle --cwd call",
-    "build:cancelable": "microbundle --cwd cancelable",
+    "build:abortable": "microbundle --cwd abortable",
+    "build:aborter": "microbundle --cwd aborter",
     "build:channel": "microbundle --cwd channel",
     "build:emitter": "microbundle --cwd emitter",
-    "build:parallel": "microbundle --cwd parallel",
     "build:race": "microbundle --cwd race",
     "build:run": "microbundle --cwd run",
     "build:sequence": "microbundle --cwd sequence",

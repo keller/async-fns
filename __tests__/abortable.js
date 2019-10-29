@@ -1,4 +1,4 @@
-import { cancelable, parallel } from "../src";
+import { abortable } from "../src";
 
 describe("cancel", () => {
   function waitAndEcho(value) {
@@ -12,7 +12,7 @@ describe("cancel", () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const start = cancelable(() => waitAndEcho(10), { signal });
+    const start = abortable(() => waitAndEcho(10), { signal });
 
     setTimeout(() => {
       controller.abort();
@@ -29,16 +29,16 @@ describe("cancel", () => {
     const controller = new AbortController();
     const signal = controller.signal;
 
-    const start = cancelable(time => waitAndEcho(time), { signal });
-    const start2 = cancelable(time => waitAndEcho(time), { signal });
+    const start = abortable(time => waitAndEcho(time), { signal });
+    const start2 = abortable(time => waitAndEcho(time), { signal });
 
     setTimeout(() => {
       controller.abort();
     }, 100);
 
-    return parallel([
-      () => start(10).catch(e => expect(e.name).toEqual("AbortError")),
-      () => start2(42).catch(e => expect(e.name).toEqual("AbortError"))
+    return Promise.all([
+      start(10).catch(e => expect(e.name).toEqual("AbortError")),
+      start2(42).catch(e => expect(e.name).toEqual("AbortError"))
     ]);
   });
 
@@ -47,10 +47,10 @@ describe("cancel", () => {
 
     const controller = new AbortController();
     const controller2 = new AbortController();
-    const run = cancelable(time => waitAndEcho(time), {
+    const run = abortable(time => waitAndEcho(time), {
       signal: controller.signal
     });
-    const run2 = cancelable(time => waitAndEcho(time), {
+    const run2 = abortable(time => waitAndEcho(time), {
       signal: controller2.signal
     });
 
@@ -58,12 +58,11 @@ describe("cancel", () => {
       controller.abort();
     }, 100);
 
-    return parallel([
-      () => run(10).catch(e => expect(e.name).toEqual("AbortError")),
-      () =>
-        run2(42).then(value => {
-          expect(value).toBe(42);
-        })
+    return Promise.all([
+      run(10).catch(e => expect(e.name).toEqual("AbortError")),
+      run2(42).then(value => {
+        expect(value).toBe(42);
+      })
     ]);
   });
 });

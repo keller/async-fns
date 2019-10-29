@@ -1,11 +1,11 @@
 {
-  "name": "cancelable",
-  "amdName": "asyncFnsCancelable",
+  "name": "aborter",
+  "amdName": "asyncFnsAborter",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/cancelable.js",
-  "module": "dist/cancelable.module.js",
-  "umd:main": "dist/cancelable.umd.js",
+  "main": "dist/aborter.js",
+  "module": "dist/aborter.module.js",
+  "umd:main": "dist/aborter.umd.js",
   "source": "src/index.js",
   "scripts": {
     "build": "microbundle",
