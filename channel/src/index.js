@@ -1,5 +1,8 @@
+import emitter from "../../emitter/src";
+
 const CHANNEL = "@@CHAN";
 export default function channel(em) {
+  if (!em) em = emitter();
   return {
     take() {
       return new Promise(resolve => {

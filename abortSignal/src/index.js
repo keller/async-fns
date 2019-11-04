@@ -1,5 +1,5 @@
 export default function(options, fn) {
-  const hoc = wrapped => {
+  const higherOrderFunction = wrapped => {
     let abort;
     options.signal.addEventListener("abort", () => {
       const msg = "The operation was aborted.";
@@ -19,5 +19,5 @@ export default function(options, fn) {
         })
       ]);
   };
-  return fn ? hoc(fn) : hoc;
+  return fn ? higherOrderFunction(fn) : higherOrderFunction;
 }
