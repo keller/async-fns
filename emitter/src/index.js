@@ -1,13 +1,18 @@
 export default function emitter(listeners) {
-  listeners = listeners || {};
+  if (!listeners) listeners = {};
   return {
     subscribe(name, listener) {
-      (listeners[name] || (listeners[name] = [])).push(listener);
+      const namedListeners = listeners[name] || (listeners[name] = []);
+      namedListeners.push(listener);
+
       return () => listeners[name].splice(listeners[name].indexOf(listener), 1);
     },
     emit(name, msg) {
-      [...(listeners[name] || [])].map(cb => cb(msg));
-      [...(listeners["*"] || [])].map(cb => cb(name, msg));
+      const named = [].concat(listeners[name] || []);
+      named.map(cb => cb(msg));
+
+      const splat = [].concat(listeners["*"] || []);
+      splat.map(cb => cb(name, msg));
     }
   };
 }

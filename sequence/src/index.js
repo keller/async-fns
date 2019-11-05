@@ -1,17 +1,20 @@
-const stopSymbol = "@@STOP";
+const stopType = "@@STOP";
 export default function sequence(fns) {
   let stopped = false;
   return fns.reduce(
     (pr, fn) =>
       Promise.resolve(pr).then(result => {
-        if (result && result[stopSymbol]) {
+        if (stopped) return result;
+
+        if (result && result[stopType]) {
           stopped = true;
-          return Promise[result[stopSymbol]](result._value);
+          return Promise[result[stopType]](result._value);
         }
-        return stopped ? result : typeof fn == "function" ? fn(result) : fn;
+
+        return typeof fn == "function" ? fn(result) : fn;
       }),
-    null
+    {}
   );
 }
-sequence.stop = _value => ({ [stopSymbol]: "resolve", _value });
-sequence.throw = _value => ({ [stopSymbol]: "reject", _value });
+sequence.stop = _value => ({ [stopType]: "resolve", _value });
+sequence.throw = _value => ({ [stopType]: "reject", _value });
