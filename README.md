@@ -309,7 +309,7 @@ unsub2();
 
 ### `run(genFunction)` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/run/dist/run.js?compression=gzip)
 
-- `@param {function\*} genFunction
+- `@param {function\*}` genFunction
 
 `run()` will call a generator function and run the function. `yielding` promises will "pause" the function until the promise resolves and resume the function, evaluating the yielded expression with the value the promise resolved with. This can approximate some async/await behavior, but has a few advantages. It doesn't require async/await to be supported in the environment, only Generator Functions or code transpiled with [Regenorator](https://facebook.github.io/regenerator/) or Babel. I think it having it be a special function using `run()` should make writing code in an async/await style easy, but it not preferential to using `sequence()`, much of the time. The [code](blob/master/run/src/index.js) for `run()` is also very short and I think that is helpful to understand what is happening when using `run()` instead of just pretending async code is synchronous.
 
@@ -331,6 +331,42 @@ run(function*() {
 });
 ```
 
-### `channel()` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/channel/dist/channel.js?compression=gzip)
+### `channel(em)` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/channel/dist/channel.js?compression=gzip)
 
-Documentation coming soon
+- `@param {Object} em` - an emitter instance
+- `@return {Object}`
+  - `take: {Function}` - waits for an event to come through in the channel and resolves with the data
+  - `put: {Function}` - puts an event into the channel. `.put()` takes a single parameter as the data to send.
+
+Channels are conceptually like a separate thread in your application that's solely responsible for side effects. You `take()` and `put()` data to the channel.
+
+```js
+import { emitter, channel, run } from "async-fns";
+
+const wait = time => new Promise(resolve => setTimeout(resolve, time));
+const chan = channel(emitter());
+
+let pingpongs = 0;
+function* pingpong(name) {
+  if (name === "ping") {
+    yield chan.put(name);
+  }
+  while (true) {
+    const msg = yield chan.take();
+
+    if (msg !== name) {
+      pingpongs += 1;
+      if (pingpongs > 10) {
+        break;
+      }
+
+      console.log(msg);
+      yield wait(10);
+      yield chan.put(name);
+    }
+  }
+}
+
+run(pingpong, "ping");
+run(pingpong, "pong");
+```
