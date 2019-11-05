@@ -294,10 +294,10 @@ import emitter from "async-fns/emitter";
 const em = emitter();
 
 // listen to an event
-const unsubsribe = em.on("foo", payload => console.log("foo", payload));
+const unsubsribe = em.subscribe("foo", payload => console.log("foo", payload));
 
 // listen to all events
-const unsub2 = emitter.on("*", (type, payload) => console.log(type, payload));
+const unsub2 = emitter.subscribe("*", (type, payload) => console.log(type, payload));
 
 // fire an event
 emitter.emit("foo", { val: 42 });
