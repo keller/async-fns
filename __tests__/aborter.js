@@ -29,7 +29,7 @@ describe("cancel", () => {
   it("should cancel multiple async fns", () => {
     expect.assertions(2);
 
-    const controller = aborter();
+    const controller = aborter(emitter());
     const signal = controller.signal;
 
     const withSignal = abortSignal({ signal });
@@ -49,8 +49,8 @@ describe("cancel", () => {
   it("shouldn't cancel all fns", () => {
     expect.assertions(2);
 
-    const controller = aborter();
-    const controller2 = aborter();
+    const controller = aborter(emitter());
+    const controller2 = aborter(emitter());
     const run = abortSignal(
       {
         signal: controller.signal

@@ -249,18 +249,19 @@ document.querySelector(".cancel").addEventListener(() => {
 });
 ```
 
-### `aborter()` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/aborter/dist/aborter.js?compression=gzip)
+### `aborter(emitter)` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/aborter/dist/aborter.js?compression=gzip)
 
+- `@param {Object} emitter` [emitter](/#emitter-) object. See [emitter](/#emitter-) for more info
 - `@return {Object}` object that can be used as an abort controller in `abortSignal()`
 
 Since [abortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) is an "experimental technology" and not well supported as of 2019 in all browsers, `aborter()` can
-be used instead in the above `abortSignal()`.
+be used instead in the above `abortSignal()`. It uses an [emitter](/#emitter-) instance object.
 
 ```js
-import { abortSignal, aborter } from "async-fns";
+import { abortSignal, aborter, emitter } from "async-fns";
 import fetchUser from "./fetchUser";
 
-const controller = aborter();
+const controller = aborter(emitter());
 const abortableFetchUser = abortSignal(
   { signal: controller.signal },
   fetchUser
@@ -285,7 +286,7 @@ document.querySelector(".cancel").addEventListener(() => {
   - `subscribe {Function}` - function used to subscribe to emitter
   - `emit {Function}` - function used to emit events to all subscribers
 
-`emitter()` is useful for managing async control when you want to listen to more than one event. Promises are great for ensuring only the async function is only resolved once, but sometimes you want to listen to multiple events.
+`emitter()` is useful for managing async control when you want to listen to more than one event. Promises and functions that return promises are great for most a, but sometimes you want to listen to multiple events.
 
 ```js
 import emitter from "async-fns/emitter";
@@ -306,10 +307,30 @@ unsubscribe();
 unsub2();
 ```
 
+### `run(genFunction)` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/run/dist/run.js?compression=gzip)
+
+- `@param {function\*} genFunction
+
+`run()` will call a generator function and run the function. `yielding` promises will "pause" the function until the promise resolves and resume the function, evaluating the yielded expression with the value the promise resolved with. This can approximate some async/await behavior, but has a few advantages. It doesn't require async/await to be supported in the environment, only Generator Functions or code transpiled with [Regenorator](https://facebook.github.io/regenerator/) or Babel. I think it having it be a special function using `run()` should make writing code in an async/await style easy, but it not preferential to using `sequence()`, much of the time. The [code](blob/master/run/src/index.js) for `run()` is also very short and I think that is helpful to understand what is happening when using `run()` instead of just pretending async code is synchronous.
+
+```js
+import run from "async-fns/run";
+
+const wait = () =>
+  new Promise(resolve => setTimeout(() => resolve("done"), time));
+
+run(function*() {
+  try {
+    const response = yield fetch(`/api`);
+    const data = yield response.json();
+
+    console.log(data.id);
+  } catch (error) {
+    console.error(error);
+  }
+});
+```
+
 ### `channel()` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/channel/dist/channel.js?compression=gzip)
-
-Documentation coming soon
-
-### `run()` ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/run/dist/run.js?compression=gzip)
 
 Documentation coming soon
