@@ -1,5 +1,5 @@
-export default function emitter(listeners) {
-  if (!listeners) listeners = {};
+export default function emitter() {
+  const listeners = {};
   return {
     subscribe(name, listener) {
       const namedListeners = listeners[name] || (listeners[name] = []);
