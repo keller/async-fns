@@ -3,10 +3,10 @@
 Helper functions for asynchronous JavScript functions.
 
 ![licence](https://img.shields.io/npm/l/async-fns)
-[![npm](https://img.shields.io/npm/v/async-fns)](https://github.com/keller/async-fns)
+[![npm](https://img.shields.io/npm/v/async-fns)](https://www.npmjs.com/package/async-fns)
 [![Build Status](https://travis-ci.org/keller/async-fns.svg?branch=master)](https://travis-ci.org/keller/async-fns)
-![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/dist/index.js?compression=gzip)
 [![Coverage Status](https://coveralls.io/repos/github/keller/async-fns/badge.svg?branch=master)](https://coveralls.io/github/keller/async-fns?branch=master)
+![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/dist/index.js?compression=gzip)
 
 ## Motivation
 
@@ -293,7 +293,7 @@ import emitter from "async-fns/emitter";
 
 const em = emitter();
 
-const unsubsribe = em.subscribe("foo", payload => console.log("foo", payload));
+const unsubscribe = em.subscribe("foo", payload => console.log("foo", payload));
 const unsub2 = em.subscribe("*", (type, payload) => console.log(type, payload));
 
 emitter.emit("foo", { val: 42 });
@@ -307,7 +307,7 @@ unsub2();
 
 - `@param {function\*}` genFunction
 
-`run()` will call a generator function and run the function. `yielding` promises will "pause" the function until the promise resolves and resume the function, evaluating the yielded expression with the value the promise resolved with. This can approximate some async/await behavior, but has a few advantages. It doesn't require async/await to be supported in the environment, only Generator Functions or code transpiled with [Regenorator](https://facebook.github.io/regenerator/) or Babel. I think it having it be a special function using `run()` should make writing code in an async/await style easy, but it not preferential to using `sequence()`, much of the time. The [code](blob/master/run/src/index.js) for `run()` is also very short and I think that is helpful to understand what is happening when using `run()` instead of just pretending async code is synchronous.
+`run()` will call a generator function and run the function. `yielding` promises will "pause" the function until the promise resolves and resume the function, evaluating the yielded expression with the value the promise resolved with. This can approximate some async/await behavior, but has a few advantages. It doesn't require async/await to be supported in the environment, only Generator Functions or code transpiled with [Regenerator](https://facebook.github.io/regenerator/) or Babel. I think it having it be a special function using `run()` should make writing code in an async/await style easy, but it not preferential to using `sequence()`, much of the time. The [code](blob/master/run/src/index.js) for `run()` is also very short and I think that is helpful to understand what is happening when using `run()` instead of just pretending async code is synchronous.
 
 ```js
 import run from "async-fns/run";
