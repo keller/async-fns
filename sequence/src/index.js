@@ -13,7 +13,7 @@ export default function sequence(fns) {
 
         return typeof fn == "function" ? fn(result) : fn;
       }),
-    {}
+    undefined
   );
 }
 sequence.stop = _value => ({ [stopType]: "resolve", _value });
