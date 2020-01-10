@@ -14,7 +14,7 @@ I've created and compiled some functions for how I do asynchronous JavaScript. A
 
 Please feel free to peak at the source code and just use the concepts in there instead of importing this library. The functions are small you and you can take the parts the are helpful and leave the parts that are not.
 
-Slide Deck to come...
+Here's a [slide deck](https://asyncfns.keller.dev/) explaining some of the motivation.
 
 ## Installation
 
