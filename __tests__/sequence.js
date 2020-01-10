@@ -39,4 +39,14 @@ describe("sequence", () => {
       b => waitAndEcho(b + 2)
     ]).catch(e => expect(e).toEqual(ERROR));
   });
+
+  it("should throw in async sequence when last", () => {
+    expect.assertions(1);
+    const ERROR = { error: "error!" };
+    return sequence([
+      waitAndEcho(1),
+      a => waitAndEcho(a + 1),
+      () => sequence.throw(ERROR)
+    ]).catch(e => expect(e).toEqual(ERROR));
+  });
 });
