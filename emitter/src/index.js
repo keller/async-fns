@@ -9,10 +9,11 @@ export default function emitter() {
     },
     emit(name, msg) {
       const named = [].concat(listeners[name] || []);
-      named.map(cb => cb(msg));
 
       const splat = [].concat(listeners["*"] || []);
-      splat.map(cb => cb(name, msg));
+      return Promise.all(
+        named.map(cb => cb(msg)).concat(splat.map(cb => cb(name, msg)))
+      );
     }
   };
 }
