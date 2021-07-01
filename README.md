@@ -7,6 +7,7 @@ Helper functions for asynchronous JavScript functions.
 [![Build Status](https://travis-ci.org/keller/async-fns.svg?branch=master)](https://travis-ci.org/keller/async-fns)
 [![Coverage Status](https://coveralls.io/repos/github/keller/async-fns/badge.svg?branch=master)](https://coveralls.io/github/keller/async-fns?branch=master)
 ![gzip size](https://img.badgesize.io/https://unpkg.com/async-fns/dist/index.js?compression=gzip)
+[![Known Vulnerabilities](https://snyk.io/test/github/keller/async-fns/badge.svg)]
 
 ## Motivation
 
