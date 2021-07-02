@@ -7,6 +7,69 @@
   "module": "dist/index.module.js",
   "umd:main": "dist/index.umd.js",
   "source": "src/index.js",
+  "files": [
+    "src",
+    "aborter",
+    "abortSignal",
+    "channel",
+    "emitter",
+    "race",
+    "run",
+    "sequence",
+    "package.json",
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "browser": "./dist/index.modern.js",
+      "import": "./dist/index.module.js",
+      "umd": "./dist/index.umd.js"
+    },
+    "./aborter": {
+      "require": "./aborter/dist/aborter.js",
+      "browser": "./aborter/dist/aborter.modern.js",
+      "import": "./aborter/dist/aborter.module.js",
+      "umd": "./aborter/dist/aborter.umd.js"
+    },
+    "./abortSignal": {
+      "require": "./abortSignal/dist/abortSignal.js",
+      "browser": "./abortSignal/dist/abortSignal.modern.js",
+      "import": "./abortSignal/dist/abortSignal.module.js",
+      "umd": "./abortSignal/dist/abortSignal.umd.js"
+    },
+    "./channel": {
+      "require": "./channel/dist/channel.js",
+      "browser": "./channel/dist/channel.modern.js",
+      "import": "./channel/dist/channel.module.js",
+      "umd": "./channel/dist/channel.umd.js"
+    },
+    "./emitter": {
+      "require": "./emitter/dist/emitter.js",
+      "browser": "./emitter/dist/emitter.modern.js",
+      "import": "./emitter/dist/emitter.module.js",
+      "umd": "./emitter/dist/emitter.umd.js"
+    },
+    "./race": {
+      "require": "./race/dist/race.js",
+      "browser": "./race/dist/race.modern.js",
+      "import": "./race/dist/race.module.js",
+      "umd": "./race/dist/race.umd.js"
+    },
+    "./run": {
+      "require": "./run/dist/run.js",
+      "browser": "./run/dist/run.modern.js",
+      "import": "./run/dist/run.module.js",
+      "umd": "./run/dist/run.umd.js"
+    },
+    "./sequence": {
+      "require": "./sequence/dist/sequence.js",
+      "browser": "./sequence/dist/sequence.modern.js",
+      "import": "./sequence/dist/sequence.module.js",
+      "umd": "./sequence/dist/sequence.umd.js"
+    }
+  },
   "scripts": {
     "build": "npm-run-all --parallel build:*",
     "build:index": "microbundle",
