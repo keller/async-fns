@@ -1,12 +1,13 @@
+import "regenerator-runtime/runtime.js";
 import { run } from "../src";
 
-const wait = time =>
-  new Promise(resolve => setTimeout(() => resolve(time), time));
-const waitReject = time =>
+const wait = (time) =>
+  new Promise((resolve) => setTimeout(() => resolve(time), time));
+const waitReject = (time) =>
   new Promise((resolve, reject) => setTimeout(() => reject("ERROR"), time));
 
 describe("run", () => {
-  it("should run a generator that yields promises", done => {
+  it("should run a generator that yields promises", (done) => {
     expect.assertions(2);
     run(function*() {
       const val1 = yield wait(50);
@@ -19,7 +20,7 @@ describe("run", () => {
     });
   });
 
-  it("catch exceptions", done => {
+  it("catch exceptions", (done) => {
     expect.assertions(1);
     run(function*() {
       try {
