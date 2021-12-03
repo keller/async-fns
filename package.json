@@ -13,6 +13,7 @@
     "abortSignal",
     "channel",
     "emitter",
+    "memo",
     "race",
     "run",
     "sequence",
@@ -51,6 +52,12 @@
       "import": "./emitter/dist/emitter.module.js",
       "umd": "./emitter/dist/emitter.umd.js"
     },
+    "./memo": {
+      "require": "./emitter/dist/memo.js",
+      "browser": "./emitter/dist/memo.modern.js",
+      "import": "./emitter/dist/memo.module.js",
+      "umd": "./emitter/dist/memo.umd.js"
+    },
     "./race": {
       "require": "./race/dist/race.js",
       "browser": "./race/dist/race.modern.js",
@@ -77,6 +84,7 @@
     "build:aborter": "microbundle --cwd aborter",
     "build:channel": "microbundle --cwd channel",
     "build:emitter": "microbundle --cwd emitter",
+    "build:memo": "microbundle --cwd memo",
     "build:race": "microbundle --cwd race",
     "build:run": "microbundle --cwd run",
     "build:sequence": "microbundle --cwd sequence",

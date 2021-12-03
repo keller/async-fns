@@ -1,0 +1,22 @@
+{
+  "name": "memo",
+  "amdName": "asyncFnsMemo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/memoFn.js",
+  "module": "dist/memo.module.js",
+  "umd:main": "dist/memo.umd.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Keller Davis",
+  "license": "MIT",
+  "private": true,
+  "mangle": {
+    "regex": "^_"
+  }
+}
