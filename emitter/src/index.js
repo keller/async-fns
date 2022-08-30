@@ -1,4 +1,4 @@
-export default function emitter() {
+export default function() {
   const listeners = {};
   return {
     subscribe(name, listener) {

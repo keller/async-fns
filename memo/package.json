@@ -3,7 +3,7 @@
   "amdName": "asyncFnsMemo",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/memoFn.js",
+  "main": "dist/memo.js",
   "module": "dist/memo.module.js",
   "umd:main": "dist/memo.umd.js",
   "source": "src/index.js",
