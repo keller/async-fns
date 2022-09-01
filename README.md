@@ -191,7 +191,7 @@ I originally created a function to run functions in parallel, but realized it pr
 - `@param {Function} abortableFunction?` An optional function to make abortable
 - `@return {Function}` wrapped function or Higher Order Function
 
-`abortSignal()` is used to a function "abortable". It takes an abort signal and function and returns a new function that can be canceled by the the [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) object. `abortSignal()` parameters are curried, so if no function is given, a Higher Order Function is returned that can create multiple wrapped abortable functions, with the same abortController object.
+`abortSignal()` is used to make a function "abortable". It takes an abort signal and function and returns a new function that can be canceled by the the [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) object. `abortSignal()` parameters are curried, so if no function is given, a Higher Order Function is returned that can create multiple wrapped abortable functions, with the same abortController object.
 
 ```js
 import abortSignal from "async-fns/abortSignal";
